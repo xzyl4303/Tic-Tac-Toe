@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fancy 井字棋游戏</title>
+    <title>井字棋游戏</title>
     <style>
         body {
             display: flex;
@@ -11,6 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
         }
         .game-container {
             text-align: center;
@@ -20,6 +21,7 @@
             grid-template-columns: 100px 100px 100px;
             grid-template-rows: 100px 100px 100px;
             grid-gap: 10px;
+            position: relative;
         }
         .cell {
             display: flex;
@@ -28,12 +30,12 @@
             font-size: 48px;
             width: 100px;
             height: 100px;
-            border: 1px solid #000;
+            background-color: #eee;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .cell:hover {
-            background-color: #eee;
+            background-color: #ddd;
         }
         .cross {
             color: red;
@@ -58,13 +60,59 @@
         }
     </style>
     <script>
-        // 游戏逻辑和JavaScript代码保持不变
-        // ...
+        let currentPlayer = 'cross';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        const symbols = {
+            cross: '❌',
+            circle: '⭕️'
+        };
+        const messages = {
+            cross: 'Player 1 (❌) wins!',
+            circle: 'Player 2 (⭕️) wins!',
+            draw: 'It\'s a draw!'
+        };
+
+        function handleMove(cell) {
+            if (board[cell] === '' && !checkWinner()) {
+                board[cell] = currentPlayer;
+                document.getElementById('cell-' + cell).innerText = symbols[currentPlayer];
+                if (checkWinner()) {
+                    document.getElementById('message').innerText = messages[currentPlayer];
+                } else if (!board.includes('')) {
+                    document.getElementById('message').innerText = messages.draw;
+                } else {
+                    currentPlayer = currentPlayer === 'cross' ? 'circle' : 'cross';
+                    document.getElementById('message').innerText = 'Player ' + (currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)') + '\'s turn';
+                }
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     </script>
 </head>
 <body>
     <div class="game-container">
-        <h1>Fancy 井字棋游戏</h1>
+        <h1>井字棋游戏</h1>
         <div class="board">
             <div class="cell" id="cell-0" onclick="handleMove(0)"></div>
             <div class="cell" id="cell-1" onclick="handleMove(1)"></div>
