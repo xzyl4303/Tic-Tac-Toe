@@ -17,14 +17,17 @@
         }
         .board {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            grid-gap: 10px;
         }
         .cell {
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
+            width: 100px;
+            height: 100px;
             border: 1px solid #000;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -32,9 +35,26 @@
         .cell:hover {
             background-color: #eee;
         }
-        .message {
-            font-size: 24px;
-            margin-top: 20px;
+        .cross {
+            color: red;
+        }
+        .circle {
+            color: green;
+        }
+        .line {
+            width: 80px;
+            height: 10px;
+            background-color: #000;
+            position: absolute;
+        }
+        .horizontal-line {
+            top: 50px;
+            left: 10px;
+        }
+        .vertical-line {
+            top: 10px;
+            left: 50px;
+            transform: rotate(90deg);
         }
     </style>
     <script>
@@ -55,6 +75,8 @@
             <div class="cell" id="cell-6" onclick="handleMove(6)"></div>
             <div class="cell" id="cell-7" onclick="handleMove(7)"></div>
             <div class="cell" id="cell-8" onclick="handleMove(8)"></div>
+            <div class="line horizontal-line"></div>
+            <div class="line vertical-line"></div>
         </div>
         <div class="message" id="message">Player 1 (❌)'s turn</div>
     </div>
