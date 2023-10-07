@@ -41,4 +41,26 @@ function checkWinner() {
 
     for (const pattern of winPatterns) {
         const [a, b, c] = pattern;
-        if (board[a] && board[a] === board[b] && board[a] ===
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function showOverlay(result) {
+    resultMessage.innerText = result;
+    overlay.style.display = 'flex';
+}
+
+function restartGame() {
+    currentPlayer = 'cross';
+    board = ['', '', '', '', '', '', '', '', ''];
+    cells.forEach(cell => {
+        cell.innerText = '';
+        cell.classList.remove('cross', 'circle');
+    });
+    overlay.style.display = 'none';
+    message.innerText = 'Player 1\'s turn';
+}
