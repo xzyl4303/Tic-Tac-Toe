@@ -14,7 +14,7 @@ cells.forEach((cell, index) => {
 function handleMove(cell) {
     if (board[cell] === '' && !checkWinner()) {
         board[cell] = currentPlayer;
-        cells[cell].innerText = currentPlayer === 'cross' ? '❌' : '⭕️';
+        cells[cell].innerHTML = currentPlayer === 'cross' ? '❌' : '⭕️';
         cells[cell].classList.add(currentPlayer);
         if (checkWinner()) {
             showOverlay(`Player ${currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)'} wins!`);
