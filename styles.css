@@ -37,14 +37,14 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.cross,
-.circle {
+.cell:hover {
+    background-color: #ddd;
+}
+
+.cross, .circle {
     position: absolute;
     width: 80px;
     height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .cross::before,
@@ -68,10 +68,6 @@ body {
 .circle::before {
     border-radius: 50%;
     background-color: green;
-}
-
-.cell:hover {
-    background-color: #ddd;
 }
 
 .overlay {
