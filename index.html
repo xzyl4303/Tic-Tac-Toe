@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>井字棋游戏</title>
+    <title>中文井字棋游戏</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>井字棋游戏</h1>
+    <div class="game-container">
+        <h1>中文井字棋游戏</h1>
+        <div class="player-names">
+            <input type="text" id="player1" placeholder="玩家1姓名">
+            <input type="text" id="player2" placeholder="玩家2姓名">
+        </div>
         <div class="board" id="board">
             <div class="cell" id="cell-0"></div>
             <div class="cell" id="cell-1"></div>
@@ -20,7 +24,7 @@
             <div class="cell" id="cell-7"></div>
             <div class="cell" id="cell-8"></div>
         </div>
-        <div class="message" id="message">玩家 1 的回合</div>
+        <div class="message" id="message">请玩家1开始</div>
         <div class="overlay" id="overlay">
             <div class="popup" id="popup">
                 <h2>游戏结束</h2>
