@@ -25,6 +25,7 @@ body {
 }
 
 .cell {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,51 +35,43 @@ body {
     background-color: #eee;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    position: relative;
-}
-
-.cell:hover {
-    background-color: #ddd;
 }
 
 .cross,
 .circle {
     position: absolute;
-    width: 0;
-    height: 0;
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cross {
-    animation-name: drawX;
+.cross::before,
+.cross::after,
+.circle::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 80px;
+    background-color: red;
 }
 
-.circle {
-    animation-name: drawO;
+.cross::before {
+    transform: rotate(45deg);
 }
 
-@keyframes drawX {
-    0% {
-        width: 0;
-        height: 0;
-    }
-    100% {
-        width: 80px;
-        height: 80px;
-    }
+.cross::after {
+    transform: rotate(-45deg);
 }
 
-@keyframes drawO {
-    0% {
-        width: 0;
-        height: 0;
-    }
-    100% {
-        width: 80px;
-        height: 80px;
-    }
+.circle::before {
+    border-radius: 50%;
+    background-color: green;
+}
+
+.cell:hover {
+    background-color: #ddd;
 }
 
 .overlay {
