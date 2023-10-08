@@ -4,16 +4,30 @@ let board = ['', '', '', '', '', '', '', '', ''];
 const cells = document.querySelectorAll('.cell');
 const message = document.getElementById('message');
 const overlay = document.getElementById('overlay');
-const popup = document.getElementById('popup');
 const resultMessage = document.getElementById('result');
 const player1Input = document.getElementById('player1');
 const player2Input = document.getElementById('player2');
 
+function drawX(cell) {
+    const xElement = document.createElement('div');
+    xElement.className = 'cross';
+    cells[cell].appendChild(xElement);
+}
+
+function drawO(cell) {
+    const oElement = document.createElement('div');
+    oElement.className = 'circle';
+    cells[cell].appendChild(oElement);
+}
+
 function handleMove(cell) {
     if (board[cell] === '' && !checkWinner()) {
         board[cell] = currentPlayer;
-        cells[cell].innerHTML = currentPlayer === 'cross' ? '❌' : '⭕️';
-        cells[cell].classList.add(currentPlayer);
+        if (currentPlayer === 'cross') {
+            drawX(cell);
+        } else {
+            drawO(cell);
+        }
         if (checkWinner()) {
             showOverlay(`${getPlayerName(currentPlayer)} 胜利！`);
         } else if (!board.includes('')) {
@@ -57,7 +71,9 @@ function restartGame() {
     board = ['', '', '', '', '', '', '', '', ''];
     cells.forEach(cell => {
         cell.innerText = '';
-        cell.classList.remove('cross', 'circle');
+        while (cell.firstChild) {
+            cell.firstChild.remove();
+        }
     });
     overlay.style.display = 'none';
     const player1Name = player1Input.value || '玩家1';
@@ -69,8 +85,10 @@ function getPlayerName(player) {
     return player === 'cross' ? player1Input.value || '玩家1' : player2Input.value || '玩家2';
 }
 
+// 添加触摸事件处理程序
 cells.forEach((cell, index) => {
     cell.addEventListener('click', () => handleMove(index));
+    cell.addEventListener('touchstart', () => handleMove(index));
 });
 
 restartGame();
