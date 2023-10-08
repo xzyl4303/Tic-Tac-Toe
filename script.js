@@ -14,15 +14,14 @@ cells.forEach((cell, index) => {
 function handleMove(cell) {
     if (board[cell] === '' && !checkWinner()) {
         board[cell] = currentPlayer;
-        cells[cell].innerHTML = currentPlayer === 'cross' ? '❌' : '⭕️';
         cells[cell].classList.add(currentPlayer);
         if (checkWinner()) {
-            showOverlay(`Player ${currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)'} wins!`);
+            showOverlay(`玩家 ${currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)'} 获胜！`);
         } else if (!board.includes('')) {
-            showOverlay('It\'s a draw!');
+            showOverlay('平局！');
         } else {
             currentPlayer = currentPlayer === 'cross' ? 'circle' : 'cross';
-            message.innerText = `Player ${currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)'}'s turn`;
+            message.innerText = `玩家 ${currentPlayer === 'cross' ? '1 (❌)' : '2 (⭕️)'} 的回合`;
         }
     }
 }
@@ -58,9 +57,8 @@ function restartGame() {
     currentPlayer = 'cross';
     board = ['', '', '', '', '', '', '', '', ''];
     cells.forEach(cell => {
-        cell.innerText = '';
         cell.classList.remove('cross', 'circle');
     });
     overlay.style.display = 'none';
-    message.innerText = 'Player 1\'s turn';
+    message.innerText = '玩家 1 的回合';
 }
